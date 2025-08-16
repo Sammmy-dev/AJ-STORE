@@ -10,6 +10,7 @@ const cors_1 = __importDefault(require("cors"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
 const http_1 = require("http");
+const dashboardRoutes_1 = __importDefault(require("./routes/dashboardRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -20,9 +21,7 @@ app.use((0, helmet_1.default)());
 app.use(helmet_1.default.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use((0, morgan_1.default)("common"));
 // Routes
-app.get("/hello", (req, res) => {
-    res.send("Hello World!");
-});
+app.use("/dashboard", dashboardRoutes_1.default);
 // Server
 const port = process.env.PORT || 3001;
 const server = new http_1.Server(app);
